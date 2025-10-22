@@ -91,9 +91,9 @@ export default function RedeemForm() {
 
   // Calculate amount in wei
   const amountWei = useMemo(() => {
-    if (!amount || !decimals) return 0n;
+    if (!amount || decimals === undefined) return 0n;
     try {
-      return parseUnits(amount, decimals);
+      return parseUnits(amount, Number(decimals));
     } catch {
       return 0n;
     }
@@ -107,9 +107,9 @@ export default function RedeemForm() {
 
   // Validate inputs
   const isValidAmount = useMemo(() => {
-    if (!amount || !balance || !decimals) return false;
+    if (!amount || !balance || decimals === undefined) return false;
     try {
-      const amt = parseUnits(amount, decimals);
+      const amt = parseUnits(amount, Number(decimals));
       return amt > 0n && amt <= balance;
     } catch {
       return false;
@@ -129,8 +129,8 @@ export default function RedeemForm() {
 
   // Handle MAX button
   const handleMax = () => {
-    if (balance && decimals) {
-      setAmount(formatUnits(balance, decimals));
+    if (balance && decimals !== undefined) {
+      setAmount(formatUnits(balance, Number(decimals)));
     }
   };
 
@@ -273,7 +273,7 @@ export default function RedeemForm() {
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-semibold">Redeem {symbol || 'plUSD'}</h2>
           <div className="text-sm text-gray-400">
-            Balance: {balance && decimals ? formatUnits(balance, decimals) : '0'} {symbol || 'plUSD'}
+            Balance: {balance && decimals !== undefined ? formatUnits(balance, Number(decimals)) : '0'} {symbol || 'plUSD'}
           </div>
         </div>
 
