@@ -101,13 +101,13 @@ export default function RedeemForm() {
 
   // Check if approval is needed
   const needsApproval = useMemo(() => {
-    if (allowance === undefined || !amountWei) return false;
+    if (allowance === undefined || allowance === null || !amountWei) return false;
     return BigInt(allowance) < amountWei;
   }, [allowance, amountWei]);
 
   // Validate inputs
   const isValidAmount = useMemo(() => {
-    if (!amount || balance === undefined || decimals === undefined) return false;
+    if (!amount || balance === undefined || balance === null || decimals === undefined) return false;
     try {
       const amt = parseUnits(amount, Number(decimals));
       return amt > 0n && amt <= BigInt(balance);
@@ -129,7 +129,7 @@ export default function RedeemForm() {
 
   // Handle MAX button
   const handleMax = () => {
-    if (balance !== undefined && decimals !== undefined) {
+    if (balance !== undefined && balance !== null && decimals !== undefined) {
       setAmount(formatUnits(BigInt(balance), Number(decimals)));
     }
   };
@@ -273,7 +273,7 @@ export default function RedeemForm() {
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-semibold">Redeem {symbol || 'plUSD'}</h2>
           <div className="text-sm text-gray-400">
-            Balance: {balance !== undefined && decimals !== undefined ? formatUnits(BigInt(balance), Number(decimals)) : '0'} {symbol || 'plUSD'}
+            Balance: {balance !== undefined && balance !== null && decimals !== undefined ? formatUnits(BigInt(balance), Number(decimals)) : '0'} {symbol || 'plUSD'}
           </div>
         </div>
 
