@@ -50,7 +50,7 @@ export default function Home() {
         <footer className="mt-12 text-center text-sm text-gray-500">
           <p>Plasma Mainnet • Chain ID 9745</p>
           <p className="mt-2">
-            Swapper: <code className="text-gray-400">0x69EcaB6aA7bDFDdD99deF0891c0317076430ae50</code>
+            plUSD: <code className="text-gray-400">0xf91c31299E998C5127Bc5F11e4a657FC0cF358CD</code>
           </p>
         </footer>
       </div>
